@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 
 class MovieItem extends Component {
   constructor() {
@@ -18,9 +19,9 @@ class MovieItem extends Component {
       this.setState({ overview: this.props.movie.overview });
     }
   }
-
+// TODOOOOOOOOOO HACER LA VISTA DETALLE Y MANDARLA ALLI
   seeDetail = () => {
-    console.log(`/detail/:${this.props.movie.id}`);
+    this.props.history.push(`/detail/${this.props.movie.id}`);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -40,14 +41,18 @@ class MovieItem extends Component {
 
     return (
       <div className="movieitem">
-        <img
-          className="movieitem__img"
-          onClick={this.seeDetail}
-          src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${
-            movie.poster_path
-          }`}
-          alt={movie.title}
-        />
+        <div className="movieitem__left">
+          <img
+            className="movieitem__img"
+            onClick={this.seeDetail}
+            src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${
+              movie.poster_path
+              }`}
+            alt={movie.title}
+          />
+      </div>
+
+        
         <div className="movieitem__info">
           <div className="movieitem__info__wrapper">
             <div className="movieitem__info__wrapper_average">
@@ -70,4 +75,4 @@ class MovieItem extends Component {
   }
 }
 
-export default MovieItem;
+export default withRouter(MovieItem);
