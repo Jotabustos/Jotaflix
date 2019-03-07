@@ -1,7 +1,8 @@
-.moviecarousel{
+
+.moviefeed{
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .movieitem{
@@ -40,6 +41,7 @@ max-height: 278px;
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 24px;
+    font-size: 15px;
 }
 
 .movieitem__info__moreinfo{
