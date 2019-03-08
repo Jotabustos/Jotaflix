@@ -1,28 +1,26 @@
 
 .moviefeed{
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .movieitem{
     display: flex;
-    max-width: 500px;
+    width: 100%;
+    max-width: 700px;
     box-sizing: border-box;
-    padding: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-
 
 .movieitem__left{
  max-width: 185px;
  max-width: 100%; 
- max-height: 278px;
  position: relative;
 }
 
-.movieitem__img{
-
-}
 
 .favouriteButton{
     position: absolute;

@@ -24,9 +24,7 @@ class Upcoming extends Component {
 
     render() {
         return (
-            <div className="moviefeed">
                 <MovieFeed movies={this.state.movies} />
-            </div>
         )
 
 

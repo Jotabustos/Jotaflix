@@ -9,7 +9,13 @@ class MovieFeed extends Component {
 
     const {movies} = this.props;
 
-    return movies.map(movie => <MovieItem key={movie.id} movie={movie} />)
+    const movieContent = movies.map(movie => <MovieItem key={movie.id} movie={movie} />)
+
+    return (
+      <div className="moviefeed">
+        {movieContent}
+      </div>
+    )
   }
 }
 

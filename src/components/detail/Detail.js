@@ -39,28 +39,6 @@ class Detail extends Component {
     };
 
     return (
-      // <div className="movieitem" style={backgroundStyle}>
-      //   <img
-      //     className="movieitem__img"
-      //     onClick={this.seeDetail}
-      //     src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-      //     alt={movie.title}
-      //   />
-      //   <div className="movieitem__info">
-      //     <div className="movieitem__info__wrapper">
-      //       <div className="movieitem__info__wrapper_average">
-      //         {movie.vote_average}
-      //       </div>
-      //       <div className="movieitem__info__wrapper_title">
-      //         {movie.title}
-      //         <div className="movieitem__info__wrapper_title_date">
-      //           {movie.release_date}
-      //         </div>
-      //       </div>
-      //     </div>
-      //     <div className="movieitem__info__overview">{movie.overview}</div>
-      //   </div>
-      // </div>
       <div>
         <div className="container__background" style={backgroundStyle} />
         <div className="container container__info">
