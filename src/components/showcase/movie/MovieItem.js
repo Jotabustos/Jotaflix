@@ -36,6 +36,11 @@ class MovieItem extends Component {
     }
   }
 
+  setFavourite = () => {
+    // setMovieFavourite action
+    console.log('favved')
+  }
+
   render() {
     const { movie } = this.props;
 
@@ -50,6 +55,10 @@ class MovieItem extends Component {
               }`}
             alt={movie.title}
           />
+          <div onClick={this.setFavourite}>
+            <i className="fas fa-heart fa-lg favouriteButton" ></i>
+          </div>
+         
       </div>
 
         

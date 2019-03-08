@@ -1,11 +1,31 @@
-.search{
-    width: 100%;
-    background-color: #fff;
-    height: 46px;
-    border-bottom: 1px solid #dedede;
+.search {
+  width: 100%;
+  background-color: #131313;
+  height: 48px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.submedia{
-    width: 1000px;
-    margin: 0 auto;
+.submedia {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
 }
+
+.searchbar {
+  color: white;
+  border: 1px solid #ffffff;
+  background-color: #131313;
+}
+
+.searchbar:focus {
+  color: white;
+  background-color: #131313;
+  border-color: none;
+  box-shadow: none;
+}
+
+::placeholder {
+  color: white !important;
+}
+

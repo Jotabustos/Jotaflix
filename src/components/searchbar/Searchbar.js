@@ -28,7 +28,7 @@ class Searchbar extends Component {
         <div className="submedia">
           <div className="search_form">
             <input
-              className="form-control form-control-lg"
+              className="form-control form-control-lg searchbar"
               placeholder="Search for a movie, tv show, person..."
               name="text"
               value={this.state.text}
