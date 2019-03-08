@@ -71,8 +71,13 @@ class MovieItem extends Component {
             </div>
           </div>
           <div className="container__movieitem__info__text">
-            <div className="container__movieitem__info__overview">{movie.overview}</div>
-            <div className="container__movieitem__info__moreinfo" onClick={this.seeDetail}>
+            <div className="container__movieitem__info__overview">
+              {movie.overview}
+            </div>
+            <div
+              className="container__movieitem__info__moreinfo"
+              onClick={this.seeDetail}
+            >
               More info
             </div>
           </div>

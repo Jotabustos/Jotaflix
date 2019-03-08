@@ -41,21 +41,40 @@ class Detail extends Component {
     return (
       <div>
         <div className="container__background" style={backgroundStyle} />
-        <div className="container container__info">
-          <div className="row">
-            <div className="col-md-4 col-sm-12 col-xs-12 container__image">
-              <img
-                className="movieitem__img"
-                onClick={this.seeDetail}
-                src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                alt={movie.title}
-              />
+        <div className="detail__container__movieitem">
+          <div className="detail__container__movieitem__left">
+            <img
+              className="detail__container__movieitem__left__img"
+              onClick={this.seeDetail}
+              src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${
+                movie.poster_path
+                }`}
+              alt={movie.title}
+            />
+            <div onClick={this.setFavourite}>
+              <i className="fas fa-heart fa-lg favouriteButton" />
             </div>
-            <div className="col-md-8 col-sm-12 col-xs-12 container__text">
-              <h2>{movie.title}</h2>
-              <div className="date__rank"><p>Release: {movie.release_date}</p> <p>Ranking: {movie.vote_average}</p></div>
-              <h4>Overview</h4>
-              <p>{movie.overview}</p>
+          </div>
+          <div className="detail__container__movieitem__info">
+            <div className="detail__container__movieitem__info__wrapper">
+              <div className="detail__container__movieitem__info__wrapper_title">
+                <h3>{movie.title}</h3>
+                <div className="detail__container__movieitem__info__wrapper_rank_date">
+                  <p>Release: {movie.release_date}</p>{" "}
+                  <p>Ranking: {movie.vote_average}</p>
+                </div>
+              </div>
+            </div>
+            <div className="detail__container__movieitem__info__text">
+              <div className="detail__container__movieitem__info__overview">
+                {movie.overview}
+              </div>
+              <div
+                className="detail__container__movieitem__info__moreinfo"
+                onClick={this.seeDetail}
+              >
+                More info
+            </div>
             </div>
           </div>
         </div>

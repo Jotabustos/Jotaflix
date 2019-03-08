@@ -38,21 +38,80 @@
 
 }
 
-/* .container__text__left {
-  flex: 0 1 50%;
-  min-height: 100%;
-  max-width: 50%;
-  border: 1px solid red;
-  background: #0bda51;
-  display: flex;
-  justify-content: center;
+/* MovieItem CSS */
+
+.detail__container__movieitem{
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.container__text__right {
-  flex: 0 1 50%;
-  display: flex;
-  height: 100%;
-  max-width: 50%;
-  flex-direction: column;
+.detail__container__movieitem__info{
+margin-left: 24px;
+position: relative;
+}
 
-} */
+.detail__container__movieitem__left{
+max-width: 185px;
+ max-width: 100%; 
+ position: relative;
+}
+
+.detail__container__movieitem__left__img{
+    height: 35vh;
+}
+
+.detail__container__movieitem__info__wrapper_rank_date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.detail__container__movieitem__info__overview{
+font-size: 14px;
+}
+
+.detail__container__movieitem__info__moreinfo{
+    position: absolute;
+    bottom: 0;
+}
+
+@media (max-width: 650px) {
+.detail__container__movieitem{
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.detail__container__movieitem__info{
+margin-left: 16px;
+margin-right: 16px;
+margin-top: 16px;
+text-align: center;
+position: relative;
+}
+
+.detail__container__movieitem__info__moreinfo{
+    position: initial;
+    margin-top: 16px;
+}
+
+.detail__container__movieitem__info{
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.detail__container__movieitem__info__text{
+    text-align: center;
+}
+
+.movieitem__info__wrapper{
+justify-content: center;
+margin-top: 24px;
+}
+
+}
