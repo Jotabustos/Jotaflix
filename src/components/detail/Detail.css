@@ -1,4 +1,11 @@
 
+.detail__container{
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .container__background {
   width: 100%;
   height: 530px;
@@ -16,41 +23,22 @@
     margin-bottom: 60px;
 }
 
-.movieitem__img {
-  height: 45vh;
-}
-
-
-.date__rank{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-@media (max-width: 767px) {
-  .container__text {
-   margin-top: 60px;
-}
-.movieitem__img {
-  height: 35vh;
-}
-
-}
 
 /* MovieItem CSS */
 
 .detail__container__movieitem{
     display: flex;
     width: 100%;
-    max-width: 700px;
+    max-width: 1000px;
     box-sizing: border-box;
-    margin-top: 20px;
+    justify-content: center;
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
 .detail__container__movieitem__info{
 margin-left: 24px;
+margin-right: 24px;
 position: relative;
 }
 
@@ -61,7 +49,7 @@ max-width: 185px;
 }
 
 .detail__container__movieitem__left__img{
-    height: 35vh;
+    height: 45vh;
 }
 
 .detail__container__movieitem__info__wrapper_rank_date{
@@ -71,15 +59,21 @@ max-width: 185px;
 }
 
 .detail__container__movieitem__info__overview{
-font-size: 14px;
+font-size: 15px;
 }
+
+
 
 .detail__container__movieitem__info__moreinfo{
     position: absolute;
     bottom: 0;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
+  .detail__container__movieitem__left__img{
+    height: 35vh;
+}
+
 .detail__container__movieitem{
    justify-content: center;
    align-items: center;

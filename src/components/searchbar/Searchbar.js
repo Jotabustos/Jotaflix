@@ -20,6 +20,7 @@ class Searchbar extends Component {
         pathname: "/search",
         state: { searchText: e.target.value }
       });
+      this.setState({text: ''})
     }
   };
   render() {

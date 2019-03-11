@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './store'
+
 import "./App.css";
-import Showcase from "./components/showcase/Showcase";
 import Navbar from './components/layout/Navbar';
 import Searchbar from './components/searchbar/Searchbar';
 import Discover from './components/discover/Discover';
@@ -14,6 +17,7 @@ import Detail from './components/detail/Detail';
 class App extends Component {
   render() {
     return (
+      <Provider store={store}>
       <Router>
        
         <div className="App">
@@ -25,6 +29,7 @@ class App extends Component {
           <Route exact path="/detail/:id" component={Detail} />
         </div>
       </Router>
+      </Provider>
     );
   }
 }

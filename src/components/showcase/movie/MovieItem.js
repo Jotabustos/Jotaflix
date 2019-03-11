@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { setFav } from '../../../actions/favsActions';
 import "./MovieItem.css";
+
 
 class MovieItem extends Component {
   constructor() {
@@ -11,16 +14,6 @@ class MovieItem extends Component {
     };
   }
 
-  componentDidMount() {
-    // if (this.props.movie.overview.length > 300) {
-    //   let newOverview = this.props.movie.overview.slice(0, 200);
-    //   newOverview = `${newOverview}...`;
-    //   this.setState({ overview: newOverview });
-    // } else {
-    //   this.setState({ overview: this.props.movie.overview });
-    // }
-  }
-  // TODOOOOOOOOOO HACER LA VISTA DETALLE Y MANDARLA ALLI
   seeDetail = () => {
     this.props.history.push(`/detail/${this.props.movie.id}`);
   };
@@ -40,6 +33,7 @@ class MovieItem extends Component {
   setFavourite = () => {
     // setMovieFavourite action
     console.log("favved");
+    this.props.setFav(this.props.movie)
   };
 
   render() {
@@ -51,7 +45,7 @@ class MovieItem extends Component {
           <img
             className="container__movieitem__left__img"
             onClick={this.seeDetail}
-            src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${
+            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
               movie.poster_path
             }`}
             alt={movie.title}
@@ -87,4 +81,8 @@ class MovieItem extends Component {
   }
 }
 
-export default withRouter(MovieItem);
+const mapStateToProps = state => ({
+  favs: state.favs
+})
+
+export default connect(mapStateToProps, {setFav})(withRouter(MovieItem));

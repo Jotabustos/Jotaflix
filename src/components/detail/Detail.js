@@ -27,7 +27,7 @@ class Detail extends Component {
     const { movie } = this.state;
     console.log(movie);
     const backgroundStyle = {
-      backgroundImage: `url(https://image.tmdb.org/t/p/original${
+      backgroundImage: `url(https://image.tmdb.org/t/p/w1000_and_h563_face${
         movie.backdrop_path
       })`,
       backgroundRepeat: "no-repeat",
@@ -39,14 +39,14 @@ class Detail extends Component {
     };
 
     return (
-      <div>
+      <div className="detail__container">
         <div className="container__background" style={backgroundStyle} />
         <div className="detail__container__movieitem">
           <div className="detail__container__movieitem__left">
             <img
               className="detail__container__movieitem__left__img"
               onClick={this.seeDetail}
-              src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${
+              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
                 movie.poster_path
                 }`}
               alt={movie.title}
@@ -58,7 +58,7 @@ class Detail extends Component {
           <div className="detail__container__movieitem__info">
             <div className="detail__container__movieitem__info__wrapper">
               <div className="detail__container__movieitem__info__wrapper_title">
-                <h3>{movie.title}</h3>
+                <h2>{movie.title}</h2>
                 <div className="detail__container__movieitem__info__wrapper_rank_date">
                   <p>Release: {movie.release_date}</p>{" "}
                   <p>Ranking: {movie.vote_average}</p>
@@ -67,14 +67,9 @@ class Detail extends Component {
             </div>
             <div className="detail__container__movieitem__info__text">
               <div className="detail__container__movieitem__info__overview">
+              <h4>Overview</h4>
                 {movie.overview}
               </div>
-              <div
-                className="detail__container__movieitem__info__moreinfo"
-                onClick={this.seeDetail}
-              >
-                More info
-            </div>
             </div>
           </div>
         </div>
