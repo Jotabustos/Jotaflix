@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MovieFeed from "../showcase/movie/MovieFeed";
 import { connect } from "react-redux";
+import {getFavs} from '../../actions/favsActions'
 
 class Favs extends Component {
 
@@ -12,6 +13,15 @@ class Favs extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.getFavs();
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.favs.movies){
+            this.setState({ movies: nextProps.favs.movies})
+        }
+    }
 
     render() {
         return (

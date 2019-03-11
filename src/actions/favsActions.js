@@ -2,7 +2,6 @@ import { SET_FAV, ALREADY_SAVED } from './types';
 
 export const setFav = (movie) => dispatch => {
     const moviesFavsSaved = JSON.parse(localStorage.getItem('favs'));
-    debugger
     if(moviesFavsSaved){
         // There are favs
         if(moviesFavsSaved.length){
@@ -43,11 +42,12 @@ export const setFav = (movie) => dispatch => {
 }
 
 export const getFavs = () => dispatch => {
-    if (localStorage.getItem('favs')) {
+    let moviesFav = JSON.parse(localStorage.getItem('favs'));
+    if (moviesFav) {
         //movie already saved
         dispatch({
-            type: ALREADY_SAVED,
-            payload: {}
+            type: SET_FAV,
+            payload: moviesFav
         })
     }
 }
