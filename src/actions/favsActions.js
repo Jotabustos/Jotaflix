@@ -1,4 +1,4 @@
-import { SET_FAV, ALREADY_SAVED } from './types';
+import { SET_FAV } from './types';
 
 export const setFav = (movie) => dispatch => {
     const moviesFavsSaved = JSON.parse(localStorage.getItem('favs'));

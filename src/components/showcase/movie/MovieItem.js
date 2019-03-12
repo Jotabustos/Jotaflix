@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { setFav } from '../../../actions/favsActions';
+import SelectCollection from '../../selectcollection/SelectCollection';
 import "./MovieItem.css";
-
 
 class MovieItem extends Component {
   constructor() {

@@ -13,6 +13,7 @@ import Upcoming from './components/upcoming/Upcoming';
 import Search from './components/search/Search';
 import Detail from './components/detail/Detail';
 import Favs from './components/favs/Favs';
+import SelectCollection from './components/selectcollection/SelectCollection';
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/search" component={Search} />
           <Route exact path="/detail/:id" component={Detail} />
           <Route exact path="/favs" component={Favs} />
+            <Route exact path="/select" component={SelectCollection} />
         </div>
       </Router>
       </Provider>
