@@ -5,93 +5,66 @@ class SelectCollection extends Component {
   constructor() {
     super();
     this.state = {
-      showSelectCollection: true,
-      togleNewList: false,
-      selectedOption: "",
-      collections: [
-        {
-          label: "A",
-          value: "A"
-        },
-        {
-          label: "B",
-          value: "B"
-        }
-      ]
+      showSelectCollection: false,
+      selectedOption: ""
     };
   }
   onChange = selectedOption => {
     this.setState({ selectedOption: selectedOption.target.value });
   };
 
-  createNewList = () => {
-    this.setState({ togleNewList: true });
+  onAccept = () => {
+    if(this.state.selectedOption !== ''){;
+      this.props.onAcceptClick(this.state.selectedOption);
+    }
   };
 
-  onAccept = () => {
-    if(this.state.selectedOption !== '') {
-      this.setState({ showSelectCollection: false });
-      console.log(this.state.selectedOption)
+  keyPress = e => {
+    if (e.keyCode === 13) {
+      this.onAccept();
     }
-
   };
 
   onCancel = () => {
-    this.setState({ showSelectCollection: false });
+    this.props.onCancelClick();
   };
 
-  render() {
-    const selectOptions = this.state.collections.map(option => (
-      <option key={option.label} value={option.value}>
-        {option.label}
-      </option>
-    ));
-    const { selectedOption, togleNewList } = this.state;
-    
+  componentWillReceiveProps(nextProps){
+    if (nextProps.showSelectCollection){
+      this.setState({showSelectCollection: true})
+    }
+  }
 
+  render() {
     const menuCollection = (
-      <form onSubmit={this.onAccept}>
-        {!togleNewList && (
-          <div>
-            <h4 onClick={this.createNewList}>Create new collection</h4>
-            <div className="form-group">
-              <label>Select Collection</label>
-              <select
-                className="form-control form-control-lg"
-                value={selectedOption}
-                onChange={this.onChange}
-              >
-                {selectOptions}
-              </select>
-            </div>
-          </div>
-        )}
-        {togleNewList && (
-          <input
-            onChange={this.onChange}
-            type="text"
-            className="form-control"
-            placeholder="Create new list"
-          />
-        )}
-        <button
-          type="button"
-          onClick={this.onAccept}
-          className="btn btn-success"
-        >
-          Accept
-        </button>
-        <button
-          type="button"
-          onClick={this.onCancel}
-          className="btn btn-danger"
-        >
-          Cancel
-        </button>
-      </form>
+      <>
+        <input
+          onChange={this.onChange}
+          type="text"
+          className="form-control searchbar inputcollection"
+          placeholder="Add to collection..."
+          onKeyDown={this.keyPress}
+        />
+        <div className="buttonscollection">
+          <button
+            type="button"
+            onClick={this.onAccept}
+            className="btn btn-success"
+          >
+            Accept
+          </button>
+          <button
+            type="button"
+            onClick={this.onCancel}
+            className="btn btn-danger"
+          >
+            Cancel
+          </button>
+        </div>
+      </>
     );
 
-    return <div className="selectCollection">{this.state.showSelectCollection ? menuCollection : null}</div>;
+    return <div className="selectCollection">{menuCollection}</div>;
   }
 }
 

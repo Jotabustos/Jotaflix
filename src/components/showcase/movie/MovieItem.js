@@ -50,9 +50,7 @@ class MovieItem extends Component {
             }`}
             alt={movie.title}
           />
-          <div onClick={this.setFavourite}>
-            <i className="fas fa-heart fa-lg favouriteButton" />
-          </div>
+          
         </div>
         <div className="container__movieitem__info">
           <div className="container__movieitem__info__wrapper">
@@ -61,6 +59,9 @@ class MovieItem extends Component {
               <div className="container__movieitem__info__wrapper_rank_date">
                 <p>Release: {movie.release_date}</p>{" "}
                 <p>Ranking: {movie.vote_average}</p>
+                {/* <div onClick={this.setFavourite}>
+                  <i className="fas fa-heart fa-lg favouriteButton" />
+                </div> */}
               </div>
             </div>
           </div>

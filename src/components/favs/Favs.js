@@ -1,41 +1,61 @@
 import React, { Component } from "react";
 import MovieFeed from "../showcase/movie/MovieFeed";
 import { connect } from "react-redux";
-import {getFavs} from '../../actions/favsActions'
+import { getFavs } from "../../actions/favsActions";
 
 class Favs extends Component {
+  constructor() {
+    super();
+    this.state = {
+      movies: [],
+      collections: [],
+      errors: {}
+    };
+  }
 
-    constructor() {
-        super();
-        this.state = {
-            movies: [],
-            errors: {}
+  componentDidMount() {
+    this.props.getFavs();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.favs.movies && nextProps.favs.movies.length > 0) {
+      
+      let collectionsNames = [];
+      // Find the different collections name
+      nextProps.favs.movies.forEach(movie => {
+        if (!collectionsNames.includes(movie.collection)) {
+          collectionsNames.push(movie.collection);
         }
-    }
+      });
+      this.setState({
+        movies: nextProps.favs.movies,
+        collections: collectionsNames
+      });
+    } 
+  }
 
-    componentDidMount(){
-        this.props.getFavs();
-    }
+  render() {
+    const { collections } = this.state;
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.favs.movies){
-            this.setState({ movies: nextProps.favs.movies})
-        }
-    }
+    const moviesFavContent = collections.map(collection => (
+      <MovieFeed
+        key={collection}
+        collection={collection}
+        movies={this.state.movies.filter(
+          movie => movie.collection === collection
+        )}
+      />
+    ));
 
-    render() {
-        return (
-            <div className="moviefeed">
-                <MovieFeed movies={this.state.movies} />
-            </div>
-        )
-
-
-    }
+    return <div className="moviefeed">{moviesFavContent}</div>;
+  }
 }
 
 const mapStateToProps = state => ({
-    favs: state.favs
-})
+  favs: state.favs
+});
 
-export default connect(mapStateToProps, {getFavs})(Favs);
+export default connect(
+  mapStateToProps,
+  { getFavs }
+)(Favs);

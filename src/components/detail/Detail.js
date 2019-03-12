@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 import { API_KEY } from "../../auth/keys";
 import "./Detail.css";
+import SelectCollection from "../selectcollection/SelectCollection";
+import { connect } from "react-redux";
+import { setFav } from "../../actions/favsActions";
 
 class Detail extends Component {
   constructor() {
     super();
     this.state = {
       movie: {},
+      showSelectCollection: false,
       errors: {}
     };
   }
@@ -23,8 +27,22 @@ class Detail extends Component {
       .then(res => this.setState({ movie: res.data }))
       .catch(err => console.log(err));
   }
+
+  onAcceptClick = collection => {
+    this.props.setFav(this.state.movie, collection);
+    this.setState({ showSelectCollection: false });
+  };
+
+  onCancelClick = () => {
+    this.setState({ showSelectCollection: false });
+  };
+
+  onFavClick = () => {
+    this.setState({ showSelectCollection: true });
+  };
+
   render() {
-    const { movie } = this.state;
+    const { movie, showSelectCollection } = this.state;
     console.log(movie);
     const backgroundStyle = {
       backgroundImage: `url(https://image.tmdb.org/t/p/w1000_and_h563_face${
@@ -48,12 +66,9 @@ class Detail extends Component {
               onClick={this.seeDetail}
               src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
                 movie.poster_path
-                }`}
+              }`}
               alt={movie.title}
             />
-            <div onClick={this.setFavourite}>
-              <i className="fas fa-heart fa-lg favouriteButton" />
-            </div>
           </div>
           <div className="detail__container__movieitem__info">
             <div className="detail__container__movieitem__info__wrapper">
@@ -62,15 +77,24 @@ class Detail extends Component {
                 <div className="detail__container__movieitem__info__wrapper_rank_date">
                   <p>Release: {movie.release_date}</p>{" "}
                   <p>Ranking: {movie.vote_average}</p>
+                  <div onClick={this.onFavClick}>
+                    <i className="fas fa-heart fa-lg favouriteButton" />
+                  </div>
                 </div>
               </div>
             </div>
             <div className="detail__container__movieitem__info__text">
               <div className="detail__container__movieitem__info__overview">
-              <h4>Overview</h4>
+                <h4>Overview</h4>
                 {movie.overview}
               </div>
             </div>
+            {showSelectCollection && (
+              <SelectCollection
+                onAcceptClick={this.onAcceptClick}
+                onCancelClick={this.onCancelClick}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -78,4 +102,8 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+const mapStateToProps = state => ({
+  favs: state.favs
+});
+
+export default connect(mapStateToProps, { setFav })(Detail);

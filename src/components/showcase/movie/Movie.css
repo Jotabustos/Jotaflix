@@ -23,9 +23,6 @@
 
 
 .favouriteButton{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
     transition: transform .2s;
 }
 
