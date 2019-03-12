@@ -1,2 +1,3 @@
 export const SET_FAV = "SET_FAV";
-export const ALREADY_SAVED = "ALREADY_SAVED";
+export const RANK_FAV = "RANK_FAV";
+;

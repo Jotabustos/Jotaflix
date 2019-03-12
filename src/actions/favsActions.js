@@ -1,4 +1,4 @@
-import { SET_FAV } from "./types";
+import { SET_FAV, RANK_FAV } from "./types";
 
 export const setFav = (movie, collection) => dispatch => {
   // Find the favourites movies stored
@@ -68,4 +68,21 @@ export const getFavs = () => dispatch => {
       });
     }
   }
+};
+
+export const evaluateMovie = (movie, user_rank) => dispatch => {
+  const movieEvaluated = { ...movie, user_rank: user_rank };
+  const moviesFav = JSON.parse(localStorage.getItem("favs"));
+  const indexOfmovieEvaluated = moviesFav.findIndex(
+    movieFav => movieFav.id === movie.id
+  );
+  const payload = {
+    indexMovie: indexOfmovieEvaluated,
+    user_rank: user_rank
+  };
+  debugger;
+  dispatch({
+    type: RANK_FAV,
+    payload: payload
+  });
 };

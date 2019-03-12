@@ -4,7 +4,7 @@ import { API_KEY } from "../../auth/keys";
 import "./Detail.css";
 import SelectCollection from "../selectcollection/SelectCollection";
 import { connect } from "react-redux";
-import { setFav } from "../../actions/favsActions";
+import { setFav, evaluateMovie } from "../../actions/favsActions";
 
 class Detail extends Component {
   constructor() {
@@ -31,6 +31,8 @@ class Detail extends Component {
   onAcceptClick = collection => {
     this.props.setFav(this.state.movie, collection);
     this.setState({ showSelectCollection: false });
+    // CHANGE THIS
+    this.props.evaluateMovie(this.state.movie, "7");
   };
 
   onCancelClick = () => {
@@ -106,4 +108,7 @@ const mapStateToProps = state => ({
   favs: state.favs
 });
 
-export default connect(mapStateToProps, { setFav })(Detail);
+export default connect(
+  mapStateToProps,
+  { setFav, evaluateMovie }
+)(Detail);
