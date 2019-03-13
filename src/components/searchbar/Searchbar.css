@@ -29,3 +29,6 @@
   color: white !important;
 }
 
+.form-control:focus{
+  border-color: #E50914 !important;
+}

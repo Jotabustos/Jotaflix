@@ -1,0 +1,19 @@
+.img__jotaflix{
+    width: 110px;
+}
+
+
+.navbar-nav__jotaflix{
+    color:white;
+}
+
+.nav-link{
+    color: white !important;
+}
+
+.nav-link.active{
+    color: #E50914 !important;;
+}
+.bg-dark{
+    background-color: #221F1F !important;;
+}

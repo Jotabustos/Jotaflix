@@ -19,6 +19,7 @@ max-width: 185px;
 
 .container__movieitem__left__img{
     height: 35vh;
+    cursor: pointer;
 }
 
 .container__movieitem__info__wrapper_rank_date{
@@ -34,6 +35,7 @@ font-size: 14px;
 .container__movieitem__info__moreinfo{
     position: absolute;
     bottom: 0;
+    cursor: pointer;
 }
 
 @media (max-width: 650px) {
@@ -86,11 +88,13 @@ margin-top: 24px;
 
 }
 
-
-
 .inputrank{
     max-width: 105px;
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.sub_header{
+    color: grey;
 }

@@ -73,10 +73,18 @@ class Detail extends Component {
           <div className="detail__container__movieitem__info">
             <div className="detail__container__movieitem__info__wrapper">
               <div className="detail__container__movieitem__info__wrapper_title">
-                <h2>{movie.title}</h2>
+                <h1>
+                  <b>{movie.title}</b>
+                </h1>
                 <div className="detail__container__movieitem__info__wrapper_rank_date">
-                  <p>Release: {movie.release_date}</p>{" "}
-                  <p>Ranking: {movie.vote_average}</p>
+                  <p>
+                    <span className="sub_header">Release</span>{" "}
+                    {movie.release_date}
+                  </p>{" "}
+                  <p>
+                    <span className="sub_header">Ranking</span>{" "}
+                    {movie.vote_average}
+                  </p>
                   <div onClick={this.onFavClick}>
                     <i className="fas fa-heart fa-lg favouriteButton" />
                   </div>
@@ -85,7 +93,9 @@ class Detail extends Component {
             </div>
             <div className="detail__container__movieitem__info__text">
               <div className="detail__container__movieitem__info__overview">
-                <h4>Overview</h4>
+                <h4>
+                  <span className="sub_header">Overview</span>
+                </h4>
                 {movie.overview}
               </div>
             </div>

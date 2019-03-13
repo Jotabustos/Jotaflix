@@ -49,14 +49,14 @@ class SelectCollection extends Component {
           <button
             type="button"
             onClick={this.onAccept}
-            className="btn btn-success"
+            className="btn btn__jotaflix"
           >
             Accept
           </button>
           <button
             type="button"
             onClick={this.onCancel}
-            className="btn btn-danger"
+            className="btn btn__jotaflix"
           >
             Cancel
           </button>

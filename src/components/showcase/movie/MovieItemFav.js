@@ -60,9 +60,9 @@ class MovieItem extends Component {
             <div className="container__movieitem__info__wrapper_title">
               <h3>{movie.title}</h3>
               <div className="container__movieitem__info__wrapper_rank_date">
-                <p>Release: {movie.release_date}</p>{" "}
-                <p>Ranking: {movie.vote_average}</p>
-                {movie.user_rank && <p>User Rate: {movie.user_rank}</p>}
+                <p><span className="sub_header">Release</span> {movie.release_date}</p>{" "}
+                <p><span className="sub_header">Ranking</span> {movie.vote_average}</p>
+                {movie.user_rank && <p><span className="sub_header">User Rate</span> {movie.user_rank}</p>}
                 <div onClick={this.removeFav}>
                   <i className="fas fa-times fa-lg favouriteButton" />
                 </div>

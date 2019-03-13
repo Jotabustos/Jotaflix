@@ -1,12 +1,10 @@
 import { SET_FAV, RANK_FAV, REMOVE_FAV } from "./types";
-import { dispatch } from "rxjs/internal/observable/range";
 
 export const setFav = (movie, collection) => dispatch => {
   // Find the favourites movies stored
   const moviesFavsSaved = JSON.parse(localStorage.getItem("favs"));
   // Add the collection name to the movie object
   const movieWithCollection = { ...movie, collection: collection };
-  debugger;
   if (moviesFavsSaved) {
     // There are favs
     if (moviesFavsSaved.length) {

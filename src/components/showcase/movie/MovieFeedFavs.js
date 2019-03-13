@@ -12,7 +12,7 @@ class MovieFeedFavs extends Component {
 
         return (
             <>
-                {collection && <h2><b>{collection}</b></h2>}
+                {collection && <h1 className="collection__title"><b>{collection}</b></h1>}
                 <div className="moviefeedfavs">
                     {movieContent}
                 </div>

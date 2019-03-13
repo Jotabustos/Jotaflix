@@ -1,10 +1,12 @@
 import React from "react";
 import {NavLink} from 'react-router-dom'
+import './Navbar.css'
+import logo from './jotaflix.png'
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <NavLink className="navbar-brand" to="/" >Jotaflix</NavLink>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar__jotaflix">
+            <NavLink className="navbar-brand" to="/" ><img className="img__jotaflix" src={logo} alt="Jotaflix" /></NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

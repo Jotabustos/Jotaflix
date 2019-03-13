@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { setFav } from '../../../actions/favsActions';
+import { setFav } from "../../../actions/favsActions";
 import "./MovieItem.css";
 
 class MovieItem extends Component {
@@ -17,11 +17,10 @@ class MovieItem extends Component {
     this.props.history.push(`/detail/${this.props.movie.id}`);
   };
 
-
   setFavourite = () => {
     // setMovieFavourite action
     console.log("favved");
-    this.props.setFav(this.props.movie)
+    this.props.setFav(this.props.movie);
   };
 
   render() {
@@ -38,15 +37,20 @@ class MovieItem extends Component {
             }`}
             alt={movie.title}
           />
-          
         </div>
         <div className="container__movieitem__info">
           <div className="container__movieitem__info__wrapper">
             <div className="container__movieitem__info__wrapper_title">
               <h3>{movie.title}</h3>
               <div className="container__movieitem__info__wrapper_rank_date">
-                <p>Release: {movie.release_date}</p>{" "}
-                <p>Ranking: {movie.vote_average}</p>
+                <p>
+                  <span className="sub_header">Release</span>{" "}
+                  {movie.release_date}
+                </p>{" "}
+                <p>
+                  <span className="sub_header">Ranking</span>{" "}
+                  {movie.vote_average}
+                </p>
                 {/* <div onClick={this.setFavourite}>
                   <i className="fas fa-heart fa-lg favouriteButton" />
                 </div> */}
@@ -72,6 +76,9 @@ class MovieItem extends Component {
 
 const mapStateToProps = state => ({
   favs: state.favs
-})
+});
 
-export default connect(mapStateToProps, {setFav})(withRouter(MovieItem));
+export default connect(
+  mapStateToProps,
+  { setFav }
+)(withRouter(MovieItem));
