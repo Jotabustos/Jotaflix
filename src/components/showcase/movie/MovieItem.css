@@ -71,4 +71,26 @@ justify-content: center;
 margin-top: 24px;
 }
 
+.inputrank{
+    max-width: 100px;
+    position: inherit !important;
+    margin-top: 20px;
+}
+
+.container_info_inputrank{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+}
+
+
+
+.inputrank{
+    max-width: 105px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

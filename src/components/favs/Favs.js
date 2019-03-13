@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MovieFeed from "../showcase/movie/MovieFeed";
+import MovieFeedFavs from "../showcase/movie/MovieFeedFavs";
 import { connect } from "react-redux";
 import { getFavs } from "../../actions/favsActions";
 
@@ -31,14 +31,19 @@ class Favs extends Component {
         movies: nextProps.favs.movies,
         collections: collectionsNames
       });
-    } 
+    } else if(nextProps.favs.movies){
+      this.setState({
+        movies: nextProps.favs.movies,
+        collections: []
+      });
+    }
   }
 
   render() {
     const { collections } = this.state;
 
     const moviesFavContent = collections.map(collection => (
-      <MovieFeed
+      <MovieFeedFavs
         key={collection}
         collection={collection}
         movies={this.state.movies.filter(

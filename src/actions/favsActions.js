@@ -1,4 +1,5 @@
-import { SET_FAV, RANK_FAV } from "./types";
+import { SET_FAV, RANK_FAV, REMOVE_FAV } from "./types";
+import { dispatch } from "rxjs/internal/observable/range";
 
 export const setFav = (movie, collection) => dispatch => {
   // Find the favourites movies stored
@@ -52,7 +53,6 @@ export const setFav = (movie, collection) => dispatch => {
 
 export const getFavs = () => dispatch => {
   let moviesFav = JSON.parse(localStorage.getItem("favs"));
-  debugger;
   if (moviesFav) {
     // More than one movie
     if (moviesFav.length) {
@@ -73,16 +73,55 @@ export const getFavs = () => dispatch => {
 export const evaluateMovie = (movie, user_rank) => dispatch => {
   const movieEvaluated = { ...movie, user_rank: user_rank };
   const moviesFav = JSON.parse(localStorage.getItem("favs"));
-  const indexOfmovieEvaluated = moviesFav.findIndex(
-    movieFav => movieFav.id === movie.id
-  );
-  const payload = {
-    indexMovie: indexOfmovieEvaluated,
-    user_rank: user_rank
-  };
+  // If is Array
+  if (Array.isArray(moviesFav)) {
+    const indexOfmovieEvaluated = moviesFav.findIndex(
+      movieFav => movieFav.id === movie.id
+    );
+    // Set localStorage with the new value
+    moviesFav[indexOfmovieEvaluated] = movieEvaluated;
+    localStorage.setItem("favs", JSON.stringify(moviesFav));
+    // Create the payload
+    const payload = {
+      indexMovie: indexOfmovieEvaluated,
+      user_rank: user_rank
+    };
+    dispatch({
+      type: RANK_FAV,
+      payload: payload
+    });
+  } else {
+    // If is not Array
+    localStorage.setItem("favs", JSON.stringify(movieEvaluated));
+    const payload = {
+      indexMovie: 0,
+      user_rank: user_rank
+    };
+    dispatch({
+      type: RANK_FAV,
+      payload: payload
+    });
+  }
+};
+
+export const removeFav = movie => dispatch => {
   debugger;
-  dispatch({
-    type: RANK_FAV,
-    payload: payload
-  });
+  const moviesFav = JSON.parse(localStorage.getItem("favs"));
+  if (Array.isArray(moviesFav)) {
+    const indexOfmovieRemoved = moviesFav.findIndex(
+      movieFav => movieFav.id === movie.id
+    );
+    moviesFav.splice(indexOfmovieRemoved, 1);
+    localStorage.setItem("favs", JSON.stringify(moviesFav));
+    dispatch({
+      type: REMOVE_FAV,
+      payload: moviesFav
+    });
+  } else {
+    localStorage.removeItem("favs");
+    dispatch({
+      type: REMOVE_FAV,
+      payload: {}
+    });
+  }
 };

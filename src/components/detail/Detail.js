@@ -31,8 +31,6 @@ class Detail extends Component {
   onAcceptClick = collection => {
     this.props.setFav(this.state.movie, collection);
     this.setState({ showSelectCollection: false });
-    // CHANGE THIS
-    this.props.evaluateMovie(this.state.movie, "7");
   };
 
   onCancelClick = () => {

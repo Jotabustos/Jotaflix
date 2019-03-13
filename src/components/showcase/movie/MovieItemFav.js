@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { setFav } from '../../../actions/favsActions';
+import { setFav, removeFav, evaluateMovie } from "../../../actions/favsActions";
+import SelectCollection from "../../selectcollection/SelectCollection";
 import "./MovieItem.css";
 
 class MovieItem extends Component {
@@ -17,12 +18,27 @@ class MovieItem extends Component {
     this.props.history.push(`/detail/${this.props.movie.id}`);
   };
 
+    rateMovie = (validateRate) => {
+      //action rate movie
+        this.props.evaluateMovie(this.props.movie, validateRate)
+  }
 
-  setFavourite = () => {
-    // setMovieFavourite action
-    console.log("favved");
-    this.props.setFav(this.props.movie)
+  keyPress = e => {
+    if (e.keyCode === 13) {
+       // Validate is a number
+        let validateRate = parseInt(e.target.value)
+        if (!Number.isNaN(validateRate)){
+            this.rateMovie(validateRate);
+        }
+      
+    }
   };
+
+    removeFav = () => {
+    this.props.removeFav(this.props.movie);
+  };
+
+  
 
   render() {
     const { movie } = this.props;
@@ -38,7 +54,6 @@ class MovieItem extends Component {
             }`}
             alt={movie.title}
           />
-          
         </div>
         <div className="container__movieitem__info">
           <div className="container__movieitem__info__wrapper">
@@ -47,9 +62,10 @@ class MovieItem extends Component {
               <div className="container__movieitem__info__wrapper_rank_date">
                 <p>Release: {movie.release_date}</p>{" "}
                 <p>Ranking: {movie.vote_average}</p>
-                {/* <div onClick={this.setFavourite}>
-                  <i className="fas fa-heart fa-lg favouriteButton" />
-                </div> */}
+                {movie.user_rank && <p>User Rate: {movie.user_rank}</p>}
+                <div onClick={this.removeFav}>
+                  <i className="fas fa-times fa-lg favouriteButton" />
+                </div>
               </div>
             </div>
           </div>
@@ -57,11 +73,20 @@ class MovieItem extends Component {
             <div className="container__movieitem__info__overview">
               {movie.overview}
             </div>
-            <div
-              className="container__movieitem__info__moreinfo"
-              onClick={this.seeDetail}
-            >
-              More info
+            <div className="container_info_inputrank">
+              <input
+                onChange={this.onChange}
+                type="text"
+                className="form-control searchbar inputrank"
+                placeholder="Rate movie"
+                onKeyDown={this.keyPress}
+              />
+              <div
+                className="container__movieitem__info__moreinfo"
+                onClick={this.seeDetail}
+              >
+                More info
+              </div>
             </div>
           </div>
         </div>
@@ -72,6 +97,9 @@ class MovieItem extends Component {
 
 const mapStateToProps = state => ({
   favs: state.favs
-})
+});
 
-export default connect(mapStateToProps, {setFav})(withRouter(MovieItem));
+export default connect(
+  mapStateToProps,
+    { setFav, evaluateMovie, removeFav }
+)(withRouter(MovieItem));
