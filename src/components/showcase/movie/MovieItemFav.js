@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { setFav, removeFav, evaluateMovie } from "../../../actions/favsActions";
-import SelectCollection from "../../selectcollection/SelectCollection";
 import "./MovieItem.css";
 
 class MovieItem extends Component {

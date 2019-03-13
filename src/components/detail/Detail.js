@@ -12,7 +12,7 @@ class Detail extends Component {
     this.state = {
       movie: {},
       showSelectCollection: false,
-      errors: {}
+      isLoading: true
     };
   }
 
@@ -24,7 +24,7 @@ class Detail extends Component {
       .get(
         `https://api.themoviedb.org/3/movie/${idDetail}?api_key=${API_KEY}&language=en-US`
       )
-      .then(res => this.setState({ movie: res.data }))
+      .then(res => this.setState({ movie: res.data, isLoading: false }))
       .catch(err => console.log(err));
   }
 
@@ -43,7 +43,6 @@ class Detail extends Component {
 
   render() {
     const { movie, showSelectCollection } = this.state;
-    console.log(movie);
     const backgroundStyle = {
       backgroundImage: `url(https://image.tmdb.org/t/p/w1000_and_h563_face${
         movie.backdrop_path
@@ -58,55 +57,62 @@ class Detail extends Component {
 
     return (
       <div className="detail__container">
-        <div className="container__background" style={backgroundStyle} />
-        <div className="detail__container__movieitem">
-          <div className="detail__container__movieitem__left">
-            <img
-              className="detail__container__movieitem__left__img"
-              onClick={this.seeDetail}
-              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-                movie.poster_path
-              }`}
-              alt={movie.title}
-            />
-          </div>
-          <div className="detail__container__movieitem__info">
-            <div className="detail__container__movieitem__info__wrapper">
-              <div className="detail__container__movieitem__info__wrapper_title">
-                <h1>
-                  <b>{movie.title}</b>
-                </h1>
-                <div className="detail__container__movieitem__info__wrapper_rank_date">
-                  <p>
-                    <span className="sub_header">Release</span>{" "}
-                    {movie.release_date}
-                  </p>{" "}
-                  <p>
-                    <span className="sub_header">Ranking</span>{" "}
-                    {movie.vote_average}
-                  </p>
-                  <div onClick={this.onFavClick}>
-                    <i className="fas fa-heart fa-lg favouriteButton" />
+        {!this.state.isLoading && (
+          <>
+            <div className="container__background" style={backgroundStyle} />
+            <div className="detail__container__movieitem">
+              {this.state.isLoading && (
+                <i className="fas fa-circle-notch fa-spin" />
+              )}
+              <div className="detail__container__movieitem__left">
+                <img
+                  className="detail__container__movieitem__left__img"
+                  onClick={this.seeDetail}
+                  src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                    movie.poster_path
+                  }`}
+                  alt={movie.title}
+                />
+              </div>
+              <div className="detail__container__movieitem__info">
+                <div className="detail__container__movieitem__info__wrapper">
+                  <div className="detail__container__movieitem__info__wrapper_title">
+                    <h1>
+                      <b>{movie.title}</b>
+                    </h1>
+                    <div className="detail__container__movieitem__info__wrapper_rank_date">
+                      <p>
+                        <span className="sub_header">Release</span>{" "}
+                        {movie.release_date}
+                      </p>{" "}
+                      <p>
+                        <span className="sub_header">Ranking</span>{" "}
+                        {movie.vote_average}
+                      </p>
+                      <div onClick={this.onFavClick}>
+                        <i className="fas fa-heart fa-lg favouriteButton" />
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div className="detail__container__movieitem__info__text">
+                  <div className="detail__container__movieitem__info__overview">
+                    <h4>
+                      <span className="sub_header">Overview</span>
+                    </h4>
+                    {movie.overview}
+                  </div>
+                </div>
+                {showSelectCollection && (
+                  <SelectCollection
+                    onAcceptClick={this.onAcceptClick}
+                    onCancelClick={this.onCancelClick}
+                  />
+                )}
               </div>
             </div>
-            <div className="detail__container__movieitem__info__text">
-              <div className="detail__container__movieitem__info__overview">
-                <h4>
-                  <span className="sub_header">Overview</span>
-                </h4>
-                {movie.overview}
-              </div>
-            </div>
-            {showSelectCollection && (
-              <SelectCollection
-                onAcceptClick={this.onAcceptClick}
-                onCancelClick={this.onCancelClick}
-              />
-            )}
-          </div>
-        </div>
+          </>
+        )}
       </div>
     );
   }
