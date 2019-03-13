@@ -1,79 +1,77 @@
-
-.moviefeed{
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
+.moviefeed {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.moviefeedfavs{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+.moviefeedfavs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-.movieitem{
-    display: flex;
-    width: 100%;
-    max-width: 700px;
-    box-sizing: border-box;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.movieitem {
+  display: flex;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.movieitem__left{
- max-width: 185px;
- max-width: 100%; 
- position: relative;
+.movieitem__left {
+  max-width: 185px;
+  max-width: 100%;
+  position: relative;
 }
 
-
-.favouriteButton{
-    transition: transform .2s;
+.favouriteButton {
+  transition: transform 0.2s;
 }
 
 .favouriteButton:hover {
   transform: scale(1.5);
-  color: #E50914
+  color: #e50914;
 }
 
-.movieitem__info{
-    display: flex;
-    flex-direction: column;
-    position: relative;
+.movieitem__info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.movieitem__info__wrapper{
-    display: flex;
-    flex-direction: row;
+.movieitem__info__wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
-.movieitem__info__wrapper_average{
-    padding: 16px;
+.movieitem__info__wrapper_average {
+  padding: 16px;
 }
 
-.movieitem__info__wrapper_title{
-    padding: 8px;
+.movieitem__info__wrapper_title {
+  padding: 8px;
 }
 
-.movieitem__info__wrapper_title_date{
-    font-size: 14px;
+.movieitem__info__wrapper_title_date {
+  font-size: 14px;
 }
 
-.movieitem__info__overview{
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 24px;
-    font-size: 14px;
+.movieitem__info__overview {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 24px;
+  font-size: 14px;
 }
 
-.movieitem__info__moreinfo{
-    padding: 16px;
-    position: absolute;
-bottom: 0;
-left: 0;
+.movieitem__info__moreinfo {
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
-.collection__title{
-    color: #E50914;
+.collection__title {
+  color: #e50914;
 }

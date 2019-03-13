@@ -8,8 +8,7 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
-      errors: {}
+      movies: []
     };
   }
 

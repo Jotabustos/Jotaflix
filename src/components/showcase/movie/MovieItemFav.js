@@ -5,39 +5,28 @@ import { setFav, removeFav, evaluateMovie } from "../../../actions/favsActions";
 import "./MovieItem.css";
 
 class MovieItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      markAsFav: "",
-      overview: ""
-    };
-  }
-
   seeDetail = () => {
     this.props.history.push(`/detail/${this.props.movie.id}`);
   };
 
-    rateMovie = (validateRate) => {
-      //action rate movie
-        this.props.evaluateMovie(this.props.movie, validateRate)
-  }
+  rateMovie = validateRate => {
+    //action rate movie
+    this.props.evaluateMovie(this.props.movie, validateRate);
+  };
 
   keyPress = e => {
     if (e.keyCode === 13) {
-       // Validate is a number
-        let validateRate = parseInt(e.target.value)
-        if (!Number.isNaN(validateRate)){
-            this.rateMovie(validateRate);
-        }
-      
+      // Validate is a number
+      let validateRate = parseInt(e.target.value);
+      if (!Number.isNaN(validateRate)) {
+        this.rateMovie(validateRate);
+      }
     }
   };
 
-    removeFav = () => {
+  removeFav = () => {
     this.props.removeFav(this.props.movie);
   };
-
-  
 
   render() {
     const { movie } = this.props;
@@ -59,9 +48,20 @@ class MovieItem extends Component {
             <div className="container__movieitem__info__wrapper_title">
               <h3>{movie.title}</h3>
               <div className="container__movieitem__info__wrapper_rank_date">
-                <p><span className="sub_header">Release</span> {movie.release_date}</p>{" "}
-                <p><span className="sub_header">Ranking</span> {movie.vote_average}</p>
-                {movie.user_rank && <p><span className="sub_header">User Rate</span> {movie.user_rank}</p>}
+                <p>
+                  <span className="sub_header">Release</span>{" "}
+                  {movie.release_date}
+                </p>{" "}
+                <p>
+                  <span className="sub_header">Ranking</span>{" "}
+                  {movie.vote_average}
+                </p>
+                {movie.user_rank && (
+                  <p>
+                    <span className="sub_header">User Rate</span>{" "}
+                    {movie.user_rank}
+                  </p>
+                )}
                 <div onClick={this.removeFav}>
                   <i className="fas fa-times fa-lg favouriteButton" />
                 </div>
@@ -100,5 +100,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-    { setFav, evaluateMovie, removeFav }
+  { setFav, evaluateMovie, removeFav }
 )(withRouter(MovieItem));

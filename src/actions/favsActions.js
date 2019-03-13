@@ -7,8 +7,9 @@ export const setFav = (movie, collection) => dispatch => {
   const movieWithCollection = { ...movie, collection: collection };
   if (moviesFavsSaved) {
     // There are favs
-    if (moviesFavsSaved.length) {
+    if (Array.isArray(moviesFavsSaved)) {
       // moviesFavsSaved is an array
+      // Same movie on different collection is allowed
       let alreadySaved = moviesFavsSaved.filter(
         movieFav =>
           movieFav.id === movie.id && movieFav.collection === collection
@@ -53,7 +54,7 @@ export const getFavs = () => dispatch => {
   let moviesFav = JSON.parse(localStorage.getItem("favs"));
   if (moviesFav) {
     // More than one movie
-    if (moviesFav.length) {
+    if (Array.isArray(moviesFav)) {
       dispatch({
         type: SET_FAV,
         payload: moviesFav
@@ -103,19 +104,20 @@ export const evaluateMovie = (movie, user_rank) => dispatch => {
 };
 
 export const removeFav = movie => dispatch => {
-  debugger;
   const moviesFav = JSON.parse(localStorage.getItem("favs"));
   if (Array.isArray(moviesFav)) {
     const indexOfmovieRemoved = moviesFav.findIndex(
       movieFav => movieFav.id === movie.id
     );
     moviesFav.splice(indexOfmovieRemoved, 1);
+    // Save the new favourites
     localStorage.setItem("favs", JSON.stringify(moviesFav));
     dispatch({
       type: REMOVE_FAV,
       payload: moviesFav
     });
   } else {
+    // Delete the entire item
     localStorage.removeItem("favs");
     dispatch({
       type: REMOVE_FAV,

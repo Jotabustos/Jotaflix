@@ -4,14 +4,12 @@ import MovieFeed from "../showcase/movie/MovieFeed";
 import { API_KEY } from "../../auth/keys";
 
 class Discover extends Component {
-
-constructor(){
+  constructor() {
     super();
     this.state = {
-        movies: [],
-        errors: {}
-    }
-}
+      movies: []
+    };
+  }
   componentDidMount() {
     // Discover
     axios
@@ -21,15 +19,13 @@ constructor(){
       .then(res => this.setState({ movies: res.data.results }))
       .catch(err => console.log(err));
   }
-  
+
   render() {
     return (
-        <div className="moviefeed">
-            <MovieFeed movies={this.state.movies} />
-        </div>
-    )
-   
-   
+      <div className="moviefeed">
+        <MovieFeed movies={this.state.movies} />
+      </div>
+    );
   }
 }
 

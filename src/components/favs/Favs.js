@@ -19,7 +19,6 @@ class Favs extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.favs.movies && nextProps.favs.movies.length > 0) {
-      
       let collectionsNames = [];
       // Find the different collections name
       nextProps.favs.movies.forEach(movie => {
@@ -31,7 +30,7 @@ class Favs extends Component {
         movies: nextProps.favs.movies,
         collections: collectionsNames
       });
-    } else if(nextProps.favs.movies){
+    } else if (nextProps.favs.movies) {
       this.setState({
         movies: nextProps.favs.movies,
         collections: []
