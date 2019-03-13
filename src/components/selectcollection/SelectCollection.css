@@ -28,3 +28,7 @@
     color: #E50914;
     border-color: #E50914;
 }
+
+.btn:focus{
+    box-shadow: none !important;
+}
