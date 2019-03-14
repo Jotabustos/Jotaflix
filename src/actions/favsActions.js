@@ -7,93 +7,61 @@ export const setFav = (movie, collection) => dispatch => {
   const movieWithCollection = { ...movie, collection: collection };
   if (moviesFavsSaved) {
     // There are favs
-    if (Array.isArray(moviesFavsSaved)) {
-      // moviesFavsSaved is an array
-      // Same movie on different collection is allowed
-      let alreadySaved = moviesFavsSaved.filter(
-        movieFav =>
-          movieFav.id === movie.id && movieFav.collection === collection
-      );
-      if (alreadySaved.length > 0) {
-        dispatch({
-          type: SET_FAV,
-          payload: moviesFavsSaved
-        });
-      } else {
-        moviesFavsSaved.unshift(movieWithCollection);
-        localStorage.setItem("favs", JSON.stringify(moviesFavsSaved));
-        dispatch({
-          type: SET_FAV,
-          payload: moviesFavsSaved
-        });
-      }
-    } else {
-      // moviesFavsSaved is not an array yet
-      let newFavs =
-        moviesFavsSaved.id !== movie.id ||
-        moviesFavsSaved.collection !== collection
-          ? [movieWithCollection, moviesFavsSaved]
-          : movieWithCollection;
-      localStorage.setItem("favs", JSON.stringify(newFavs));
+    // Check if the movie is already in the collection
+    let alreadySaved = moviesFavsSaved.find(
+      movieFav =>
+        movieFav.id === movie.id && movieFav.collection === collection
+    );
+    if(alreadySaved){
       dispatch({
         type: SET_FAV,
-        payload: newFavs
+        payload: moviesFavsSaved
+      });
+    } else{
+      moviesFavsSaved.unshift(movieWithCollection);
+      saveFavInLocalStorage(moviesFavsSaved);
+      dispatch({
+        type: SET_FAV,
+        payload: moviesFavsSaved
       });
     }
   } else {
     // First Item Saved
-    localStorage.setItem("favs", JSON.stringify(movieWithCollection));
+    saveFavInLocalStorage([movieWithCollection]);
     dispatch({
       type: SET_FAV,
-      payload: movieWithCollection
+      payload: [movieWithCollection]
     });
   }
 };
 
 export const getFavs = () => dispatch => {
+  // Find the favourites movies stored
   let moviesFav = JSON.parse(localStorage.getItem("favs"));
   if (moviesFav) {
-    // More than one movie
-    if (Array.isArray(moviesFav)) {
-      dispatch({
-        type: SET_FAV,
-        payload: moviesFav
-      });
-    } else {
-      // Only one movie
-      dispatch({
-        type: SET_FAV,
-        payload: [moviesFav]
-      });
-    }
+    dispatch({
+      type: SET_FAV,
+      payload: moviesFav
+    });
   }
 };
 
 export const evaluateMovie = (movie, user_rank) => dispatch => {
-  const movieEvaluated = { ...movie, user_rank: user_rank };
+  // Find the favourites movies stored
   const moviesFav = JSON.parse(localStorage.getItem("favs"));
-  // If is Array
-  if (Array.isArray(moviesFav)) {
+  // Add the user rate to the movie object
+  const movieEvaluated = { ...movie, user_rank: user_rank };
+  // Check if the fav list is not undefined
+  if (moviesFav) {
     const indexOfmovieEvaluated = moviesFav.findIndex(
       movieFav => movieFav.id === movie.id
     );
-    // Set localStorage with the new value
     moviesFav[indexOfmovieEvaluated] = movieEvaluated;
-    localStorage.setItem("favs", JSON.stringify(moviesFav));
+    // Set localStorage with the new value
+    saveFavInLocalStorage(moviesFav);
     // Create the payload
     const payload = {
       indexMovie: indexOfmovieEvaluated,
-      user_rank: user_rank
-    };
-    dispatch({
-      type: RANK_FAV,
-      payload: payload
-    });
-  } else {
-    // If is not Array
-    localStorage.setItem("favs", JSON.stringify(movieEvaluated));
-    const payload = {
-      indexMovie: 0,
       user_rank: user_rank
     };
     dispatch({
@@ -125,3 +93,9 @@ export const removeFav = movie => dispatch => {
     });
   }
 };
+
+
+const saveFavInLocalStorage = (movies) =>{
+  localStorage.removeItem("favs");
+  localStorage.setItem("favs", JSON.stringify([...movies]));
+}

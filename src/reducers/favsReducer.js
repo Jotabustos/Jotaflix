@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
     case SET_FAV:
       return {
         ...state,
-        movies: action.payload
+        movies: [...action.payload]
       };
 
     case RANK_FAV: {
